@@ -1,5 +1,4 @@
-import axios, { AxiosInstance } from "axios"
-
+import axios, { AxiosInstance, AxiosResponse } from "axios"
 
 const axiosInstance:AxiosInstance = axios.create();
 const urlRegex: RegExp = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
@@ -27,16 +26,17 @@ class Params{
     hasUrl = () => this.url !== undefined;
 }
 
-const params = new Params();
+const params: Params = new Params();
 
-console.log(`has params: ${params.hasParams()}`);
-console.log(`has url: ${params.hasUrl()}`);
-console.log(params.getUrl());
-console.log(params.getParams());
+// console.log(`Has params: ${params.hasParams()}`);
+console.log("Requesting from: " + params.getUrl());
+// console.log(params.getParams());
+console.log("Start -----------------------------------------------------------------------------------");
     
 axiosInstance.get(params.getUrl())
-    .then(res => {
+    .then((res:AxiosResponse) => {
         const html = res.data;
         console.log(html);
+        console.log("End -----------------------------------------------------------------------------------");
     })
     .catch(console.error);
